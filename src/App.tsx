@@ -1,64 +1,78 @@
-import Chart, { ArcElement, ChartMeta, ChartType, Plugin } from 'chart.js/auto';
-import { useEffect } from 'react';
-
-const BORDER_WIDTH = 20;
-
-const customPlugin: Plugin<'doughnut'> = {
-  id: '',
-  afterDatasetDraw: (chart, args, options) => {
-    const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
-    const arc = chart.getDatasetMeta(0).data[0] as ArcElement;
-    const startAngle = arc.startAngle;
-    const endAngle = arc.endAngle;
-    const outerRadius = arc.outerRadius + arc.options.offset + 5;
-    const innerRadius = arc.innerRadius - 5;
-    const centerX = arc.x;
-    const centerY = arc.y;
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = BORDER_WIDTH;
-    ctx.moveTo(centerX + innerRadius * Math.cos(startAngle), centerY + innerRadius * Math.sin(startAngle));
-    ctx.lineTo(centerX + outerRadius * Math.cos(startAngle), centerY + outerRadius * Math.sin(startAngle));
-    ctx.moveTo(centerX + innerRadius * Math.cos(endAngle), centerY + innerRadius * Math.sin(endAngle));
-    ctx.lineTo(centerX + outerRadius * Math.cos(endAngle), centerY + outerRadius * Math.sin(endAngle));
-    ctx.closePath();
-    ctx.stroke();
-    ctx.restore();
-  }
-}
+import Chart from "chart.js/auto";
+import { useEffect } from "react";
+import { config } from "./helpers/config";
 
 const App = () => {
   useEffect(() => {
-    const chart = new Chart(document.getElementById('myChart') as HTMLCanvasElement, {
-      type: "doughnut",
-      data: {
-        datasets: [{
-          data: [100, 300],
-          backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 99, 100)',
-          ],
-          hoverOffset: 30,
-          borderWidth: 0,
-        }]
-      },
-      options: {
-        plugins: {
-          tooltip: {
-            enabled: false
-          }
+    const chart = new Chart(
+      document.getElementById("myChart") as HTMLCanvasElement,
+      config
+    );
+
+    const chart4 = new Chart(
+      document.getElementById("myChart4") as HTMLCanvasElement,
+      {
+        ...config,
+        data: {
+          ...config.data,
+          datasets: [
+            {
+              ...config.data.datasets[0],
+              data: [100,100,100,100],
+            }
+          ]
         }
-      },
-      plugins: [customPlugin]
-    });
+      }
+    );
+
+    const chart5 = new Chart(
+      document.getElementById("myChart5") as HTMLCanvasElement,
+      {
+        ...config,
+        data: {
+          ...config.data,
+          datasets: [
+            {
+              ...config.data.datasets[0],
+              data: [100,100,100,100, 100],
+            }
+          ]
+        }
+      }
+    );
+
+    const chart6 = new Chart(
+      document.getElementById("myChart6") as HTMLCanvasElement,
+      {
+        ...config,
+        data: {
+          ...config.data,
+          datasets: [
+            {
+              ...config.data.datasets[0],
+              data: [100,100,100,100, 100, 100],
+            }
+          ]
+        }
+      }
+    );
   });
 
-  return <div className="container" style={{
-    width: '600px',
-    height: '600px',
-  }}><canvas id="myChart"></canvas></div>;
+  return (
+    <div
+      className="container"
+      style={{
+        width: "600px",
+        height: "600px",
+        backgroundColor: "#f5f5f5"
+      }}
+    >
+      <div><canvas id="myChart"></canvas></div>
+      <div><canvas id="myChart4"></canvas></div>
+      <div><canvas id="myChart5"></canvas></div>
+      <div><canvas id="myChart6"></canvas></div>
+    </div>
+  );
 };
 
 export default App;
