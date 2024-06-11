@@ -59,9 +59,11 @@ const customPlugin: Plugin<'doughnut'> = {
       ctx.fillStyle = 'lightblue';
       ctx.fill();
 
-      ctx.lineWidth = 5;
-      ctx.strokeStyle = 'green';
-      ctx.stroke();
+      if(arc.options.offset > 1) {
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'green';
+        ctx.stroke();
+      }
       ctx.restore();
     });
   }
