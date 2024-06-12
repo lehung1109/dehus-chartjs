@@ -157,6 +157,8 @@ export const drawArcs = (chart: Chart<"doughnut">) => {
         ctx.lineWidth = 5;
         ctx.strokeStyle = hoverBorderColor;
         ctx.stroke();
+
+        // draw a triangle at the center of bottom border of the arc
       }
 
       // restore context
