@@ -9,6 +9,11 @@ const model = {
     HoverBorderRadiusOffset: 15,
     HoverBorderRadiusDegree: 5,
     HoverBorderRadiusCircleRadius: 15,
+    startColor: "#ffd700",
+    endColor: "#a52a2a",
 }
 
-export { model };
+const data = [100, 100, 100];
+const rotate = data[0] / data.reduce((a, b) => a + b, 0) * 360 / 2;
+
+export { model, data, rotate };

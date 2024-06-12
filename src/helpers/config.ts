@@ -1,12 +1,6 @@
 import { ChartConfiguration } from "chart.js/auto";
 import { customPlugin } from "./customPlugin";
-import { model } from "./const";
-
-const data = [100, 100, 100];
-const rotate = data[0] / data.reduce((a, b) => a + b, 0) * 360 / 2;
-const {
-    hoverBackgroundColor
-} = model;
+import { data, rotate } from "./const";
 
 const config: ChartConfiguration<"doughnut"> = {
     type: "doughnut",

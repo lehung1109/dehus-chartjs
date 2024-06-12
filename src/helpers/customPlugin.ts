@@ -1,6 +1,7 @@
 
 import { ArcElement, Plugin } from 'chart.js/auto';
-import { model } from './const';
+import { data, model } from './const';
+import { blendColors } from "@solcode/color-blend-midpoints/src"
 
 const {
   borderRadiusOffset,
@@ -9,7 +10,11 @@ const {
   HoverBorderRadiusOffset,
   HoverBorderRadiusDegree,
   HoverBorderRadiusCircleRadius,
+  startColor,
+  endColor,
 } = model;
+
+const blends = data.length >= 2 ? blendColors(startColor, endColor, data.length - 2) : [startColor, endColor];
 
 const angleOffsets: { [key: number]: number } = {
   3: 3,
@@ -74,8 +79,6 @@ const customPlugin: Plugin<'doughnut'> = {
     const metaData = chart.getDatasetMeta(0).data as ArcElement[];
 
     metaData.forEach((arc, index) => {
-      // arc = metaData[2];
-
       const startAngle = arc.startAngle;
       const endAngle = arc.endAngle;
       const outerRadius = arc.outerRadius + arc.options.offset + 1;
@@ -113,7 +116,7 @@ const customPlugin: Plugin<'doughnut'> = {
       drawRadiusArc(ctx, outerRadius, start, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, start < 0 ? true : false);
       ctx.closePath();
 
-      ctx.fillStyle = 'red';
+      ctx.fillStyle = blends[index] || 'red';
       ctx.fill();
 
       if(arc.options.offset > 1) {
