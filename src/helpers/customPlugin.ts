@@ -2,6 +2,10 @@
 import Chart, { ArcElement, Plugin } from 'chart.js/auto';
 import { drawArcs, drawOutsideCircle } from './drawArc';
 import { drawLabels } from './drawLabels';
+import { model } from './const';
+const {
+  outsideOffset
+} = model;
 
 const customPlugin: Plugin<'doughnut'> = {
   id: 'custom-plugin',
@@ -24,7 +28,7 @@ const customPlugin: Plugin<'doughnut'> = {
 
     const wrapper = canvas.closest<HTMLElement>('.lifecycle-donut-block');
     wrapper?.classList.add('active');
-    wrapper?.style.setProperty('--inner-width', `${arc.innerRadius * 2 - 40}px`);
+    wrapper?.style.setProperty('--inner-width', `${arc.innerRadius * 2 - outsideOffset - 40}px`);
   },
   afterInit: (chart) => {
     console.log('after Init');

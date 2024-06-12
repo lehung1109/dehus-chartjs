@@ -12,7 +12,7 @@ const model = {
     startColor: "#ffd700",
     endColor: "#a52a2a",
     outsideColor: '#abc204',
-    outsideOffset: 10,
+    outsideOffset: 15,
     labels: [['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem']],
     labelColors: ['green',' blue'],
     labelBackground: "#fff",

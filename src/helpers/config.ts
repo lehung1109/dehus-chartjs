@@ -9,7 +9,6 @@ const config: ChartConfiguration<"doughnut"> = {
             data: data,
             backgroundColor: 'transparent',
             hoverOffset: 5,
-            borderWidth: 0,
             rotation: -rotate,
             spacing: 15
         }]
