@@ -1,6 +1,14 @@
 import Chart from "chart.js/auto";
 import { useEffect } from "react";
 import { config } from "./helpers/config";
+import "./style.scss";
+import { model } from "./helpers/const";
+
+const {
+  defaultImage,
+  defaultTitle,
+  defaultText
+} = model;
 
 const App = () => {
   useEffect(() => {
@@ -63,14 +71,34 @@ const App = () => {
       className="container"
       style={{
         width: "600px",
-        height: "600px",
-        backgroundColor: "#f5f5f5"
+        height: "600px"
       }}
     >
-      <div><canvas id="myChart"></canvas></div>
-      <div><canvas id="myChart4"></canvas></div>
-      <div><canvas id="myChart5"></canvas></div>
-      <div><canvas id="myChart6"></canvas></div>
+      <div className="lifecycle-donut-block">
+        <canvas id="myChart"></canvas>
+
+        <div className="lifecycle-donut-block__default">
+          <div className="lifecycle-donut-block__default-image">
+            <picture>
+              <img
+                src={defaultImage.src}
+                alt={defaultImage.alt}
+                width={defaultImage.width}
+                height={defaultImage.height}
+              />
+            </picture>
+          </div>
+
+          <div className="lifecycle-donut-block__default-content">
+            {defaultTitle && <div className="lifecycle-donut-block__default-title">{defaultTitle}</div>}
+
+            {defaultText && <div className="lifecycle-donut-block__default-text">{defaultText}</div>}
+          </div>
+        </div>
+      </div>
+      <div className="lifecycle-donut-block"><canvas id="myChart4"></canvas></div>
+      <div className="lifecycle-donut-block"><canvas id="myChart5"></canvas></div>
+      <div className="lifecycle-donut-block"><canvas id="myChart6"></canvas></div>
     </div>
   );
 };

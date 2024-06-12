@@ -21,7 +21,10 @@ const config: ChartConfiguration<"doughnut"> = {
             }
         },
         layout: {
-            padding: 20
+            padding: {
+                top: 0,
+                bottom: 10,
+            }
         },
         animation: {
             duration: 0

@@ -13,6 +13,8 @@ const {
   endColor,
   outsideColor,
   outsideOffset,
+  hoverBorderColor,
+  hoverBackgroundColor,
 } = model;
 
 const blends = data.length >= 2 ? blendColors(startColor, endColor, data.length - 2) : [startColor, endColor];
@@ -151,9 +153,9 @@ export const drawArcs = (chart: Chart<"doughnut">) => {
       ctx.fill();
 
       // only draw border when arc is offset
-      if(arc.options.offset > 1) {
+      if(arc.active) {
         ctx.lineWidth = 5;
-        ctx.strokeStyle = 'green';
+        ctx.strokeStyle = hoverBorderColor;
         ctx.stroke();
       }
 
