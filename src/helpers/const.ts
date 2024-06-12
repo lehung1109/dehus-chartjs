@@ -11,6 +11,8 @@ const model = {
     HoverBorderRadiusCircleRadius: 15,
     startColor: "#ffd700",
     endColor: "#a52a2a",
+    outsideColor: '#abc204',
+    outsideOffset: 10,
 }
 
 const data = [100, 100, 100];

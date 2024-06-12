@@ -11,6 +11,8 @@ const {
   HoverBorderRadiusCircleRadius,
   startColor,
   endColor,
+  outsideColor,
+  outsideOffset,
 } = model;
 
 const blends = data.length >= 2 ? blendColors(startColor, endColor, data.length - 2) : [startColor, endColor];
@@ -71,15 +73,46 @@ export const drawRadiusArc = (
   ctx.lineTo(p2.x, p2.y);
 }
 
-export const drawArc = (chart: Chart<"doughnut">) => {
+export const getOuterRadius = (arc: ArcElement) => {
+    return arc.outerRadius + arc.options.offset + 1;
+}
+
+export const getInnerRadius = (arc: ArcElement) => {
+    return arc.innerRadius - 1;
+}
+
+export const drawOutsideCircle = (chart: Chart<"doughnut">) => {
+    const { ctx } = chart;
+    const metaData = chart.getDatasetMeta(0).data as ArcElement[];
+    const arc = metaData[0];
+
+    ctx.save();
+    ctx.fillStyle = outsideColor;
+    ctx.beginPath();
+
+    // outer circle
+    ctx.arc(arc.x, arc.y, arc.outerRadius + outsideOffset, 0, 2 * Math.PI);
+
+    // inner circle
+    ctx.arc(arc.x, arc.y, arc.innerRadius - outsideOffset, 0, 2 * Math.PI, true);
+
+    // close path and fill color
+    ctx.closePath();
+    ctx.fill();
+
+    // restore context
+    ctx.restore();
+}
+
+export const drawArcs = (chart: Chart<"doughnut">) => {
     const { ctx } = chart;
     const metaData = chart.getDatasetMeta(0).data as ArcElement[];
 
     metaData.forEach((arc, index) => {
       const startAngle = arc.startAngle;
       const endAngle = arc.endAngle;
-      const outerRadius = arc.outerRadius + arc.options.offset + 1;
-      const innerRadius = arc.innerRadius - 1;
+      const outerRadius = getOuterRadius(arc);
+      const innerRadius = getInnerRadius(arc);
       const centerX = arc.x;
       const centerY = arc.y;
       const spacingOffset = getSpacingOffset(innerRadius, outerRadius, endAngle, startAngle, arc.options.spacing);
@@ -111,17 +144,20 @@ export const drawArc = (chart: Chart<"doughnut">) => {
 
       // radius the line from 1 - 2
       drawRadiusArc(ctx, outerRadius, start, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, start < 0 ? true : false);
-      ctx.closePath();
 
+      // close path and fill color
+      ctx.closePath();
       ctx.fillStyle = blends[index] || 'red';
       ctx.fill();
 
+      // only draw border when arc is offset
       if(arc.options.offset > 1) {
         ctx.lineWidth = 5;
         ctx.strokeStyle = 'green';
         ctx.stroke();
       }
 
+      // restore context
       ctx.restore();
     });
 }

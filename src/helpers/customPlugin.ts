@@ -1,11 +1,15 @@
 
 import { Plugin } from 'chart.js/auto';
-import { drawArc } from './drawArc';
+import { drawArcs, drawOutsideCircle } from './drawArc';
 
 const customPlugin: Plugin<'doughnut'> = {
   id: 'custom-plugin',
   afterDatasetDraw: (chart) => {
-    drawArc(chart);
+    // draw outside circle first
+    drawOutsideCircle(chart);
+
+    // draw arcs
+    drawArcs(chart);
   }
 }
 
