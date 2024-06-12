@@ -3,7 +3,8 @@ const model = {
     borderColor: "#fff",
     hoverBorderColor: "blue",
     hoverBackgroundColor: "green",
-    cornerRadius: 10
+    radiusROffset: 10,
+    radiusRAngle: 3
 }
 
 export { model };
