@@ -3,8 +3,12 @@ const model = {
     borderColor: "#fff",
     hoverBorderColor: "blue",
     hoverBackgroundColor: "green",
-    radiusROffset: 10,
-    radiusRAngle: 3
+    borderRadiusOffset: 10,
+    borderRadiusDegree: 5,
+    borderRadiusCircleRadius: 10,
+    HoverBorderRadiusOffset: 15,
+    HoverBorderRadiusDegree: 5,
+    HoverBorderRadiusCircleRadius: 15,
 }
 
 export { model };
