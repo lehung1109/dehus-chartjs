@@ -48,11 +48,11 @@ const drawRadiusArc = (
   radiusRRadian: number,
   borderRadius: number,
   borderOffset: number,
-  inner: boolean,
+  shouldAroundInside: boolean,
   endLine: boolean,
   revert: boolean = false
 ) => {
-  let p0 = rThetaToXY(R - borderOffset * (inner ? -1 : 1), theta, x, y);
+  let p0 = rThetaToXY(R - borderOffset * (shouldAroundInside ? -1 : 1), theta, x, y);
   const p1 = rThetaToXY(R, theta, x, y);
   let p2 = rThetaToXY(R, theta + radiusRRadian * (endLine ? -1 : 1) * (theta > 0 ? 1 : -1), x, y);
 
@@ -74,6 +74,8 @@ const customPlugin: Plugin<'doughnut'> = {
     const metaData = chart.getDatasetMeta(0).data as ArcElement[];
 
     metaData.forEach((arc, index) => {
+      // arc = metaData[2];
+
       const startAngle = arc.startAngle;
       const endAngle = arc.endAngle;
       const outerRadius = arc.outerRadius + arc.options.offset + 1;
@@ -96,19 +98,19 @@ const customPlugin: Plugin<'doughnut'> = {
       ctx.arc(centerX, centerY, outerRadius, start + radiusRRadian, end - radiusRRadian);
 
       // radius the line from 2 - 3
-      drawRadiusArc(ctx, outerRadius, end, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, false, true);
+      drawRadiusArc(ctx, outerRadius, end, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, end > 0 ? true : false, true);
 
       // radius the line from 3 - 4
-      drawRadiusArc(ctx, innerRadius, innerEnd, centerX, centerY, radiusRRadian, borderRadius, borderOffset, true, false);
+      drawRadiusArc(ctx, innerRadius, innerEnd, centerX, centerY, radiusRRadian, borderRadius, borderOffset, true, innerEnd > 0 ? true : false);
 
       // arc from 3 - 4
       ctx.arc(centerX, centerY, innerRadius, innerEnd - radiusRRadian, innerStart + radiusRRadian, true);
 
       // radius the line from 4 - 1
-      drawRadiusArc(ctx, innerRadius, innerStart, centerX, centerY, radiusRRadian, borderRadius, borderOffset, true, true, true);
+      drawRadiusArc(ctx, innerRadius, innerStart, centerX, centerY, radiusRRadian, borderRadius, borderOffset, true, innerStart < 0 ? true : false, true);
 
       // radius the line from 1 - 2
-      drawRadiusArc(ctx, outerRadius, start, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, true);
+      drawRadiusArc(ctx, outerRadius, start, centerX, centerY, radiusRRadian, borderRadius, borderOffset, false, start < 0 ? true : false);
       ctx.closePath();
 
       ctx.fillStyle = 'red';
