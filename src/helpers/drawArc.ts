@@ -15,7 +15,10 @@ const {
   outsideOffset,
   hoverBorderColor,
   hoverBackgroundColor,
+  arrowAngle,
 } = model;
+
+const arrowRadian = arrowAngle * Math.PI / 180;
 
 const blends = data.length >= 2 ? blendColors(startColor, endColor, data.length - 2) : [startColor, endColor];
 
@@ -158,7 +161,14 @@ export const drawArcs = (chart: Chart<"doughnut">) => {
         ctx.strokeStyle = hoverBorderColor;
         ctx.stroke();
 
-        // draw a triangle at the center of bottom border of the arc
+        // draw arrow active
+        const coors = rThetaToXY(arc.innerRadius - outsideOffset, (innerStart + innerEnd) / 2, centerX, centerY);
+        ctx.fillStyle = hoverBorderColor;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, innerRadius, (innerStart + innerEnd) / 2 - arrowRadian, (innerStart + innerEnd) / 2 + arrowRadian);
+        ctx.lineTo(coors.x, coors.y);
+        ctx.closePath();
+        ctx.fill();
       }
 
       // restore context

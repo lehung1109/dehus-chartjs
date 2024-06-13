@@ -10,8 +10,6 @@ const {
 const customPlugin: Plugin<'doughnut'> = {
   id: 'custom-plugin',
   afterDatasetDraw: (chart) => {
-    console.log('after Dataset Draw');
-
     // draw outside circle first
     drawOutsideCircle(chart);
 
@@ -29,9 +27,6 @@ const customPlugin: Plugin<'doughnut'> = {
     const wrapper = canvas.closest<HTMLElement>('.lifecycle-donut-block');
     wrapper?.classList.add('active');
     wrapper?.style.setProperty('--inner-width', `${arc.innerRadius * 2 - outsideOffset - 40}px`);
-  },
-  afterInit: (chart) => {
-    console.log('after Init');
   }
 }
 

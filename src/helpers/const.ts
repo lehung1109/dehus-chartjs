@@ -22,6 +22,7 @@ const model = {
     lineHeight: 16,
     fontSize: "14px",
     fontFamily: "Arial",
+    arrowAngle: 5,
     defaultImage: {
         width: 400,
         height: 400,
