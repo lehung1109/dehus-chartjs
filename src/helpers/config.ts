@@ -37,19 +37,34 @@ const config: ChartConfiguration<"doughnut"> = {
         events: ['click'],
         onClick: (event, activeElements, chart) => {
             const { canvas } = chart;
-            const activeData: ActiveDataModel[] = [];
+            const wrapper = canvas.closest<HTMLElement>(".lifecycle-donut-block");
+            const items = wrapper?.querySelectorAll<HTMLElement>('[data-arc-index]');
+            let activeData: ActiveDataModel[] = JSON.parse(
+                canvas.dataset.activeData || "[]"
+              );
 
             activeElements.forEach((element) => {
                 const { index, datasetIndex } = element;
 
-                activeData.push({ datasetIndex, index });
+                activeData = [{ datasetIndex, index }];
+                
+                // show item active and hide item remains
+                items?.forEach((item) => {
+                    const arcIndex = parseInt(item.dataset.arcIndex || '');
+
+                    if(arcIndex === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
             });
 
             if(activeData.length) {
-                canvas.classList.add('active');
+                wrapper?.classList.add('active');
                 canvas.dataset.activeData = JSON.stringify(activeData);
             } else {
-                canvas.classList.remove('active');
+                wrapper?.classList.remove('active');
                 canvas.dataset.activeData = '';
             }
         }

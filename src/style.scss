@@ -6,6 +6,11 @@
         visibility: visible;
     }
 
+    &.active {
+        --default-display: none;
+        --active-display: block;
+    }
+
     canvas {
         &.on-hover {
             cursor: pointer;
@@ -20,6 +25,7 @@
         width: var(--inner-width);
         height: var(--inner-width);
         color: blue;
+        display: var(--default-display, block);
     }
 
     &__default-image {
@@ -52,6 +58,7 @@
         transform: translate(-50%, -50%);
         width: var(--inner-width);
         height: var(--inner-width);
+        display: var(--active-display, none);
     }
 
     &__item {
@@ -61,6 +68,11 @@
         transform: translate(0, -50%);
         width: 100%;
         text-align: center;
+        display: none;
+
+        &.active {
+            display: block;
+        }
     }
 
     &__image {
