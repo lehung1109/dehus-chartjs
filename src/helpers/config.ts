@@ -1,6 +1,7 @@
 import { ChartConfiguration } from "chart.js/auto";
 import { customPlugin } from "./customPlugin";
 import { data, rotate } from "./const";
+import { spaces } from "./drawArc";
 
 const config: ChartConfiguration<"doughnut"> = {
     type: "doughnut",
@@ -10,7 +11,7 @@ const config: ChartConfiguration<"doughnut"> = {
             backgroundColor: 'transparent',
             hoverOffset: 5,
             rotation: -rotate,
-            spacing: 15
+            spacing: spaces[data.length],
         }]
     },
     options: {

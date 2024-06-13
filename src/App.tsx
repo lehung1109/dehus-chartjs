@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { config } from "./helpers/config";
 import "./style.scss";
 import { model } from "./helpers/const";
+import { spaces } from "./helpers/drawArc";
 
 const {
   defaultImage,
@@ -27,6 +28,7 @@ const App = () => {
             {
               ...config.data.datasets[0],
               data: [100,100,100,100],
+              spacing: spaces[4],
             }
           ]
         }
@@ -43,6 +45,7 @@ const App = () => {
             {
               ...config.data.datasets[0],
               data: [100,100,100,100, 100],
+              spacing: spaces[5],
             }
           ]
         }
@@ -59,6 +62,7 @@ const App = () => {
             {
               ...config.data.datasets[0],
               data: [100,100,100,100, 100, 100],
+              spacing: spaces[6],
             }
           ]
         }

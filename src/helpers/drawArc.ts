@@ -23,11 +23,18 @@ const arrowRadian = arrowAngle * Math.PI / 180;
 const blends = data.length >= 2 ? blendColors(startColor, endColor, data.length - 2) : [startColor, endColor];
 
 export const angleOffsets: { [key: number]: number } = {
-    3: 3,
-    4: 3,
-    5: 2,
-    6: 2,
+    3: 1.5,
+    4: 1,
+    5: 1,
+    6: 1,
 }
+
+export const spaces: { [key: number]: number } = {
+    3: 5,
+    4: 7,
+    5: 9,
+    6: 11,
+};
 
 /**
  * Convert (r, 𝜃) to (x, y)
