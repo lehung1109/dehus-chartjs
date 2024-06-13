@@ -13,7 +13,7 @@ const model = {
     endColor: "#a52a2a",
     outsideColor: '#abc204',
     outsideOffset: 15,
-    labels: [['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem']],
+    labels: [['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem'], ['Lorem ispum', 'Lorem']],
     labelColors: ['green',' blue'],
     labelBackground: "#fff",
     labelRound: 30,
@@ -39,8 +39,73 @@ const model = {
                 alt: "alt text",
                 src: "https://picsum.photos/300/300"
             },
-            title: "Lorem ipsum one line only",
-            text: "text content one line only",
+            title: "one line only 1",
+            text: "one line only 1",
+            button: {
+                text: "click me"
+            }
+        },
+        {
+            img: {
+                width: 300,
+                height: 300,
+                alt: "alt text",
+                src: "https://picsum.photos/300/300"
+            },
+            title: "one line only 2",
+            text: "one line only 2",
+            button: {
+                text: "click me"
+            }
+        },
+        {
+            img: {
+                width: 300,
+                height: 300,
+                alt: "alt text",
+                src: "https://picsum.photos/300/300"
+            },
+            title: "one line only 3",
+            text: "one line only 3",
+            button: {
+                text: "click me"
+            }
+        },
+        {
+            img: {
+                width: 300,
+                height: 300,
+                alt: "alt text",
+                src: "https://picsum.photos/300/300"
+            },
+            title: "one line only 4",
+            text: "one line only 4",
+            button: {
+                text: "click me"
+            }
+        },
+        {
+            img: {
+                width: 300,
+                height: 300,
+                alt: "alt text",
+                src: "https://picsum.photos/300/300"
+            },
+            title: "one line only 5",
+            text: "one line only 5",
+            button: {
+                text: "click me"
+            }
+        },
+        {
+            img: {
+                width: 300,
+                height: 300,
+                alt: "alt text",
+                src: "https://picsum.photos/300/300"
+            },
+            title: "one line only 6",
+            text: "one line only 6",
             button: {
                 text: "click me"
             }

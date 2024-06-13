@@ -2,8 +2,14 @@
     position: relative;
     visibility: hidden;
 
-    &.active {
+    &.show {
         visibility: visible;
+    }
+
+    canvas {
+        &.on-hover {
+            cursor: pointer;
+        }
     }
 
     &__default {
@@ -37,5 +43,43 @@
     &__default-title {
         font-weight: bold;
         font-size: 20px;
+    }
+
+    &__items {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--inner-width);
+        height: var(--inner-width);
+    }
+
+    &__item {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        width: 100%;
+        text-align: center;
+    }
+
+    &__image {
+        line-height: 0;
+        margin-bottom: 10px;
+
+        img {
+            width: 55%;
+            height: auto;
+            border-radius: 50%;
+        }
+    }
+
+    &__title {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        margin-bottom: 10px;
     }
 }

@@ -159,7 +159,7 @@ export const drawArcs = (chart: Chart<"doughnut">) => {
 
       // close path and fill color
       ctx.closePath();
-      ctx.fillStyle = blends[index] || 'red';
+      ctx.fillStyle = arc.active ? hoverBackgroundColor : blends[index] || 'red';
       ctx.fill();
 
       // only draw border when arc is offset

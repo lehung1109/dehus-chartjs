@@ -8,7 +8,8 @@ import { spaces } from "./helpers/drawArc";
 const {
   defaultImage,
   defaultTitle,
-  defaultText
+  defaultText,
+  items
 } = model;
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
               ...config.data.datasets[0],
               data: [100,100,100,100],
               spacing: spaces[4],
+              rotation: -1 * 100 / 400 * 360 / 2,
             }
           ]
         }
@@ -46,6 +48,7 @@ const App = () => {
               ...config.data.datasets[0],
               data: [100,100,100,100, 100],
               spacing: spaces[5],
+              rotation: -1 * 100 / 500 * 360 / 2,
             }
           ]
         }
@@ -63,6 +66,7 @@ const App = () => {
               ...config.data.datasets[0],
               data: [100,100,100,100, 100, 100],
               spacing: spaces[6],
+              rotation: -1 * 100 / 600 * 360 / 2,
             }
           ]
         }
@@ -98,6 +102,43 @@ const App = () => {
 
             {defaultText && <div className="lifecycle-donut-block__default-text">{defaultText}</div>}
           </div>
+        </div>
+
+        <div className="lifecycle-donut-block__items">
+          {
+            items.map((item, index) => {
+              const {
+                img,
+                title,
+                text,
+                button
+              } = item;
+              
+              return (
+                <div className="lifecycle-donut-block__item" key={index} data-arc-index={index}>
+                  <div className="lifecycle-donut-block__image">
+                    {
+                      img && 
+                      <picture>
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          width={img.width}
+                          height={img.height}
+                        />
+                      </picture>
+                    }
+                  </div>
+
+                  {title && <div className="lifecycle-donut-block__title">{title}</div>}
+
+                  {text && <div className="lifecycle-donut-block__text">{text}</div>}
+
+                  {button && <div className="lifecycle-donut-block__button"><button>{button.text}</button></div>}
+                </div>
+              );
+            })
+          }
         </div>
       </div>
       <div className="lifecycle-donut-block"><canvas id="myChart4"></canvas></div>

@@ -3,6 +3,11 @@ import { customPlugin } from "./customPlugin";
 import { data, rotate } from "./const";
 import { spaces } from "./drawArc";
 
+export interface ActiveDataModel {
+    index: number;
+    datasetIndex: number;
+}
+
 const config: ChartConfiguration<"doughnut"> = {
     type: "doughnut",
     data: {
@@ -28,6 +33,25 @@ const config: ChartConfiguration<"doughnut"> = {
         },
         animation: {
             duration: 0
+        },
+        events: ['click'],
+        onClick: (event, activeElements, chart) => {
+            const { canvas } = chart;
+            const activeData: ActiveDataModel[] = [];
+
+            activeElements.forEach((element) => {
+                const { index, datasetIndex } = element;
+
+                activeData.push({ datasetIndex, index });
+            });
+
+            if(activeData.length) {
+                canvas.classList.add('active');
+                canvas.dataset.activeData = JSON.stringify(activeData);
+            } else {
+                canvas.classList.remove('active');
+                canvas.dataset.activeData = '';
+            }
         }
     },
     plugins: [customPlugin]
