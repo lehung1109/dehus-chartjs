@@ -19,9 +19,12 @@ const model = {
     labelRound: 30,
     labelPaddingLeft: 15,
     labelPaddingTop: 7,
-    lineHeight: 16,
-    fontSize: "14px",
-    fontFamily: "Arial",
+    lineHeight1: 16,
+    fontSize1: "14px",
+    fontFamily1: "Arial",
+    lineHeight2: 16,
+    fontSize2: "14px",
+    fontFamily2: "Arial",
     arrowAngle: 5,
     defaultImage: {
         width: 400,
@@ -42,7 +45,8 @@ const model = {
             title: "one line only 1",
             text: "one line only 1",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         },
         {
@@ -55,7 +59,8 @@ const model = {
             title: "one line only 2",
             text: "one line only 2",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         },
         {
@@ -68,7 +73,8 @@ const model = {
             title: "one line only 3",
             text: "one line only 3",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         },
         {
@@ -81,7 +87,8 @@ const model = {
             title: "one line only 4",
             text: "one line only 4",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         },
         {
@@ -94,7 +101,8 @@ const model = {
             title: "one line only 5",
             text: "one line only 5",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         },
         {
@@ -107,7 +115,8 @@ const model = {
             title: "one line only 6",
             text: "one line only 6",
             button: {
-                text: "click me"
+                text: "click me",
+                href: "https://www.google.com/"
             }
         }
     ]

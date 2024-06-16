@@ -8,25 +8,13 @@ const {
     labelRound,
     labelPaddingLeft,
     labelPaddingTop,
-    lineHeight,
-    fontSize,
-    fontFamily
+    lineHeight1,
+    fontSize1,
+    fontFamily1,
+    lineHeight2,
+    fontSize2,
+    fontFamily2,
 } = model;
-
-const drawRoundedRect = (ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number) => {
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
-    ctx.closePath();
-    ctx.fill();
-}
 
 const drawLabels = (chart: Chart<"doughnut">) => {
     const { ctx } = chart;
@@ -48,9 +36,17 @@ const drawLabels = (chart: Chart<"doughnut">) => {
         const lines = labels[index];
 
         if(lines) {
-            ctx.font = `normal ${fontSize} ${fontFamily}`;
-            const textWidth = Math.max(...lines.map(line => ctx.measureText(line).width));
-            const textHeight = lineHeight * lines.length;
+            // calculate text width and height
+            const textWidth = Math.max(...lines.map((line, index) => {
+                if(index === 0) {
+                    ctx.font = `normal ${fontSize1} ${fontFamily1}`;
+                } else {
+                    ctx.font = `normal ${fontSize2} ${fontFamily2}`;
+                }
+
+                return ctx.measureText(line).width;
+            }));
+            const textHeight = lineHeight1 * lines.length;
     
             // draw label background
             ctx.fillStyle = labelBackground;
@@ -63,7 +59,14 @@ const drawLabels = (chart: Chart<"doughnut">) => {
 
             lines.forEach((line, i) => {
                 ctx.fillStyle = labelColors[i];
-                ctx.fillText(line, labelX - textWidth / 2, labelY + (i - (lines.length - 1) / 2) * lineHeight);
+
+                if(index === 0) {
+                    ctx.font = `normal ${fontSize1} ${fontFamily1}`;
+                    ctx.fillText(line, labelX - textWidth / 2, labelY + (i - (lines.length - 1) / 2) * lineHeight1);
+                } else {
+                    ctx.font = `normal ${fontSize2} ${fontFamily2}`;
+                    ctx.fillText(line, labelX - textWidth / 2, labelY + (i - (lines.length - 1) / 2) * lineHeight2);
+                }
             });
         }
 
